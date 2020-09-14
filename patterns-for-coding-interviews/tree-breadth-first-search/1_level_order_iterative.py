@@ -4,7 +4,7 @@ class TreeNode:
     self.left, self.right = None, None
 
 
-def traverse(root):
+def traverse(root, reverse = False):
   result = []
   
   if root is None:
@@ -25,6 +25,8 @@ def traverse(root):
 
     result.append(currLevel)
 
+  if reverse:
+    return result[::-1]
   return result
 
 if __name__ == "__main__":
@@ -34,4 +36,4 @@ if __name__ == "__main__":
   root.left.left = TreeNode(9)
   root.right.left = TreeNode(10)
   root.right.right = TreeNode(5)
-  print("Level order traversal: " + str(traverse(root)))
+  print("Level order traversal: " + str(traverseZigZag(root)))
