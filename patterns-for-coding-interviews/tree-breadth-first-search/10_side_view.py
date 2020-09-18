@@ -10,31 +10,26 @@ def tree_side_view(root, view = 'right'):
   result = []
   
   if root:
-    levelOrderTraverse = []
     traverseArr = [root]
 
     while len(traverseArr) > 0:
-      currLevelNodes = []
-
-      for _ in range(len(traverseArr)):
+      currLevelLength = len(traverseArr)
+      for i in range(currLevelLength):
         currNode = traverseArr.pop(0)
-        currLevelNodes.append(currNode)
 
-        if currNode.right:
-          traverseArr.append(currNode.right)
+        if view == 'right':
+          if i == currLevelLength - 1:
+            result.append(currNode)
+        if view == 'left':
+          if i == 0:
+            result.append(currNode)
+
         if currNode.left:
           traverseArr.append(currNode.left)
-        
-      levelOrderTraverse.append(currLevelNodes)
-
-    for level in levelOrderTraverse:
-      if view == 'left':
-        result.append(level[-1])
-      else:
-        result.append(level[0])
+        if currNode.right:
+          traverseArr.append(currNode.right)
 
   return result
-
 
 def main():
   root = TreeNode(12)
