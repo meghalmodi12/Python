@@ -15,7 +15,7 @@ def find_minimum_depth(root):
       for _ in range(currLevelNodeCount):
         currNode = traverseArr.pop(0)
 
-        if currNode.left is None and currNode.right is None:
+        if not currNode.left and not currNode.right:
           return minimumDepth
         if currNode.left:
           traverseArr.append(currNode.left)
