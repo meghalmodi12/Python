@@ -41,6 +41,14 @@ class LinkedList:
             start = start.next
         return count
 
+    def convertToList(self):
+        elements = []
+        start = self.head
+        while start:
+            elements.append(str(start.value))
+            start = start.next
+        return elements
+
     def printList(self):
         elements = []
         start = self.head
