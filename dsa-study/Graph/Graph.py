@@ -14,6 +14,16 @@ class Graph:
             vertex = self.arr[source]
             vertex.insertAtHead(destination)
 
+    def addDirectedEdge(self, source, destination):
+        if source < self.vertices and destination < self.vertices:
+            vertex = self.arr[source]
+            vertex.insertAtHead(destination)
+
+    def addUndirectedEdge(self, source, destination):
+        if source < self.vertices and destination < self.vertices:
+            self.arr[source].insertAtHead(destination)
+            self.arr[destination].insertAtHead(source)
+
     def printGraph(self):
         for i in range(len(self.arr)):
             result = []
