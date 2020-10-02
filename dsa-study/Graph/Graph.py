@@ -14,6 +14,11 @@ class Graph:
             vertex = self.arr[source]
             vertex.insertAtHead(destination)
 
+    def removeEdge(self, source, destination):
+        if source < self.vertices and destination < self.vertices:
+            adjNodeList = self.arr[source]
+            adjNodeList.delete(destination)
+
     def addDirectedEdge(self, source, destination):
         if source < self.vertices and destination < self.vertices:
             vertex = self.arr[source]

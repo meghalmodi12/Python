@@ -6,8 +6,7 @@ def findMotherVertex(g):
 
     for i in range(g.vertices):
         if not processed[i]:
-            currentIterVisited = [False] * g.vertices
-            if dfs(g, i, currentIterVisited):
+            if dfs(g, i, [False] * g.vertices):
                 return i
 
     return -1
