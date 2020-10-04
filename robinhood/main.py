@@ -43,7 +43,7 @@ for row in range(headerRowIndex + 1, sheetToProcess.nrows):
 
             currentRowData = {
                 'timeOfTrade': timeStampOfTrade,
-                'dateOfTrade': dateCell,
+                'dateOfTrade': dateOfTrade,
                 'pricePerStock': sheetToProcess.cell_value(row,3),
                 'lotSize': int(sheetToProcess.cell_value(row,4)),
                 'amountPaid': sheetToProcess.cell_value(row,7)
@@ -61,7 +61,7 @@ for row in range(headerRowIndex + 1, sheetToProcess.nrows):
 
             currentRowData = {
                 'timeOfTrade': timeStampOfTrade,
-                'dateOfTrade': dateCell,
+                'dateOfTrade': dateOfTrade,
                 'pricePerStock': sheetToProcess.cell_value(row,3),
                 'numOfStocksSold': int(abs(sheetToProcess.cell_value(row,4))),
                 'amountGained': sheetToProcess.cell_value(row,5)
@@ -78,6 +78,7 @@ for symbol, info in symbolSellDict.items():
     info = info.sort(key=itemgetter('timeOfTrade'))
 
 # Start calculating profit / loss for each symbol
+arrResult = [['Symbol', 'Purchase Date', 'Sell Date', 'Purchase Amount', 'Sell Amount', '# Of Unit Sold / Remaining', 'Gain / Loss / Equity']]
 symbolProfitDict = {}
 for symbol, info in symbolSellDict.items():
     if symbol not in symbolProfitDict:
@@ -89,13 +90,25 @@ for symbol, info in symbolSellDict.items():
     while sellQueue:
         trasaction = sellQueue.pop(0)
 
-        while trasaction['numOfStocksSold'] != 0:
+        while trasaction['numOfStocksSold'] > 0:
+            netGain = trasaction['pricePerStock'] - buyQueue[0]['pricePerStock']
+            symbolProfitDict[symbol] += netGain
+
+            purchaseDate = buyQueue[0]['dateOfTrade'].strftime("%d-%b-%Y")
+            sellDate = trasaction['dateOfTrade'].strftime("%d-%b-%Y")
+            arrResult.append([symbol, purchaseDate, sellDate, buyQueue[0]['pricePerStock'], trasaction['pricePerStock'], 1, netGain])
+
             trasaction['numOfStocksSold'] -= 1
-            symbolProfitDict[symbol] += (trasaction['pricePerStock'] - buyQueue[0]['pricePerStock'])
             if buyQueue[0]['lotSize'] == 1:
                 buyQueue.pop(0)
             else:
                 buyQueue[0]['lotSize'] -= 1
+
+    while buyQueue:
+        transaction = buyQueue.pop(0)
+        purchaseDate = trasaction['dateOfTrade'].strftime("%d-%b-%Y")
+        arrResult.append([symbol, purchaseDate, '', transaction['pricePerStock'], '', transaction['lotSize'], transaction['pricePerStock'] * transaction['lotSize']])
+
 
 # Print final profit / loss
 result = 0
@@ -104,4 +117,4 @@ for val in symbolProfitDict.values():
 
 # print(symbolProfitDict)
 # print(symbolBuyDict)
-print(result)
+print(arrResult)
