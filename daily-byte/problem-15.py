@@ -77,6 +77,3 @@ result = mergeLinkedList(list1.head, list2.head)
 while result:
     print(result.val, end = '->')
     result = result.next
-
-
-
