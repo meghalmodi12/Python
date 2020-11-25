@@ -1,5 +1,5 @@
 """
-Given a binary tree return all the values you’d be able to see if you were standing on the left side of it with values ordered from top to bottom.
+Given a binary tree return all the values you would be able to see if you were standing on the left side of it with values ordered from top to bottom
 
 Ex: Given the following tree
 
