@@ -1,4 +1,4 @@
-from Tree import BinarySearchTree
+from Tree import BinarySearchTree_Old
 
 def display(node):
     lines, _, _, _ = _display_aux(node)
@@ -68,7 +68,7 @@ def _display_aux(node):
         [a + u * ' ' + b for a, b in zipped_lines]
     return lines, n + m + u, max(p, q) + 2, n + u // 2
 
-BST = BinarySearchTree(6)
+BST = BinarySearchTree_Old(6)
 BST.insert(3)
 BST.insert(2)
 BST.insert(4)

@@ -1,6 +1,6 @@
 from Node import Node
 
-class BinarySearchTree:
+class BinarySearchTree_Old:
     def __init__(self, value):
         self.root = Node(value)
 

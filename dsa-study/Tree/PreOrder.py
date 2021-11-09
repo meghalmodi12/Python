@@ -1,4 +1,4 @@
-from Tree import BinarySearchTree
+from Tree import BinarySearchTree_Old
 
 # DFS with a small change - Add right to stack and then add left to stack
 def preOrderTraversal(root):
@@ -20,7 +20,7 @@ def preOrderTraversal(root):
 
     return result
 
-BST = BinarySearchTree(6)
+BST = BinarySearchTree_Old(6)
 BST.insert(4)
 BST.insert(9)
 BST.insert(5)
